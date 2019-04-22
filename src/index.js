@@ -2,11 +2,12 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 const ToDoList = () => {
+
+  const items = ['eat', 'drink'];
   return (
     <ul>
-      <li>Учица</li>
-      <li>Плакать</li>
-      <li>Какать</li>
+      <li>{items[0]}</li>
+      <li>{items[1]}</li>
     </ul>
   );
 };
@@ -16,12 +17,15 @@ const AppHeader = () => {
 };
 
 const SearchPanel = () => {
-  return  <input placeholder="search" />;
+  const placeholderText = 'search';
+  const searchStyle = { fontSize: '20px' };
+  return  <input style={searchStyle} placeholder={placeholderText} />;
 };
 
 const App = () => {
   return (
     <div>
+      <span>{ (new Date()).toString() }</span>
       <AppHeader />
       <SearchPanel />
       <ToDoList />
