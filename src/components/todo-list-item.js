@@ -1,4 +1,5 @@
 import React from 'react';
+import './todo-list-item.css'
 
 const ToDoListItem = ({ label, important = false }) => {
 
@@ -6,7 +7,9 @@ const ToDoListItem = ({ label, important = false }) => {
     color: important ? 'tomato' : 'black'
   }
   return (
-    <span style={spanStyle}>{ label }</span>
+    <span className="list-group todo-list-item" style={spanStyle}>
+      { label }
+    </span>
   );
 };
 
