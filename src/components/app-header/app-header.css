@@ -1,0 +1,13 @@
+.app-header {
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+.title {
+  margin-right: 1rem;
+}
+
+.subtitle {
+  color: grey;
+  font-size: 1.2rem;
+}
