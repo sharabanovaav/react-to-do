@@ -20,7 +20,10 @@ const App = () => {
         <SearchPanel />
         <ItemStatusFilter />
       </div>
-      <ToDoList todoes = {toDoData}/>
+      <ToDoList 
+        todoes={toDoData}
+        onDeleted={ (id) => { console.log(id); }}
+      />
     </div>
   );
 };
