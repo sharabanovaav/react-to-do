@@ -3,15 +3,14 @@ import './add-button.css'
 
 export default class AddButton extends Component {
 
-
   render() {
 
     const { addItem } = this.props;
 
     return (
       <div className="button-wrapper">
-       <button onClick={addItem}
-         className="btn btn-outline-success">
+       <button onClick={ () => addItem('task')}
+         className="btn btn-outline-secondary">
          Add
        </button>
       </div>
