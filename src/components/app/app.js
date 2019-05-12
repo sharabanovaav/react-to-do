@@ -16,7 +16,9 @@ export default class App extends Component {
       this.createToDoItem('run'),
       this.createToDoItem('eat'),
       this.createToDoItem('sleep'),
-    ]
+    ],
+    term: '',
+    filter: 'all'
   }
 
   createToDoItem(label) {
@@ -70,8 +72,38 @@ export default class App extends Component {
    });
   }
 
+  setTerm = (e) => {
+    const term = e.target.value;
+    this.setState({ term });
+  }
+
+  setFilter = (filter) => {
+    this.setState({ filter });
+  }
+
+  search(items, term) {
+    if (!term.length) {
+      return items;
+    }
+
+    return items.filter((el) => el.label.toLowerCase().includes(term.toLowerCase()));
+  }
+
+  filter(items, filter) {
+    switch (filter) {
+      case 'active':
+      return items.filter((el) => !el.done);
+      case 'done':
+      return items.filter((el) => el.done);
+      default: 
+      return items;
+    }
+  }
+
   render() {
-    const { toDoData } = this.state;
+    const { toDoData, term, filter } = this.state;
+
+    const visibleItems = this.filter(this.search(toDoData, term), filter);
     const doneCount = toDoData.filter((el) => el.done === true).length;
     const toDoCount = toDoData.length - doneCount;
 
@@ -79,11 +111,14 @@ export default class App extends Component {
       <div className="wrapper">
         <AppHeader toDo={toDoCount} done={doneCount} />
         <div className="d-flex">
-          <SearchPanel />
-          <ItemStatusFilter />
+          <SearchPanel searchItems={this.setTerm} />
+          <ItemStatusFilter 
+            filter={filter} 
+            filterItems={this.setFilter}
+          />
         </div>
         <ToDoList 
-          todoes={toDoData}
+          todoes={visibleItems}
           onDeleted={ this.deleteItem }
           onToggleImportant={ this.toggleImportant }
           onToggleDone={ this.toggleDone }
